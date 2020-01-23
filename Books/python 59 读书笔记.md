@@ -19,3 +19,11 @@
     * it=(len(x) for x in open('myfile.txt'))
     * 与列表表达式的区别为圆括号；当使用it的时候才会调用其表达式进行运算，不像列表会把所有的数据都读出来。所以这种方式可以适用于大数据量的情况。
 
+* 7. 同时打印列表元素与元素下标
+   * string=['a','b','c','d','e','f']
+   * for i,s in enumerate(string):
+     * print(i,s)
+   * 结果会是 0,'a';1,'b';2,'c'....
+   * for i,s in enumerate(string,1):
+     * print(i,s)
+   * 结果会是 1,'a';2,'b';3,'c'....
