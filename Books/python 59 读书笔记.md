@@ -22,7 +22,7 @@
 * 7. 同时打印列表元素与元素下标
    * `string=['a','b','c','d','e','f']`
    *  for i,s in enumerate(string):
-   *     print(i,s)
+      *   print(i,s)
    * 结果会是 0,'a';1,'b';2,'c'....
    * for i,s in enumerate(string,1):
      * print(i,s)
