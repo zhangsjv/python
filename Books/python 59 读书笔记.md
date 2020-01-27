@@ -40,5 +40,75 @@
    
 * 10. 在设计函数的时候需要考虑，如果将来函数的返回值需要做if语句的判定条件，那么需要考虑当返回值是0时该怎么处理。因为返回值0有极大的可能是函数的正常返回值，但是但还进行条件判定的时候会判定为Falser
 
-* 11. 
+* 11. 使用生成器函数代替列表类型返回值。
+   * def index_word_iter(text):
+      * if text:
+         * yield 0
+      * for index, letter in enumerate(text)
+         * if letter== ' ':
+            * yield index+1
+   * 如果text存在，先返回其单词第一个字母下标，也就是0；然后循环访问text（可能一个单词，可能一行单词，可能一个文本）的每个字符，如果遇到空格，则记录当前位置的下一个位置，因为那是下一个单词的首字母字符下标。 这个会返回一个迭代器，只有在访问这个迭代器的时候才会读取，所以不会占用太大内存。
+   * **注意： 如果把迭代器赋值给某个变化，那么这个变量只能使用一次。比如：
+      * a=index_word_it
+      * for i in a: # 第一次调用，可以正确的打印出内容
+         * print(i)
+      
+      * for i in a: # 第二次调用，打印内容为空，因为a的内容已经没了
+         * print(i)
+         
+      * 可以使用 for i in index_word_it(text): 来代替
+
+* 12.  ‵*arg是什么参数
+   * 表示可变参数。如果函数中有这个参数，表示从这个位置开始可以有任意个数的参数。如果想把列表中的元素当作参数，需要在列表前加上`*
+   * def log(message,*value): 
+        * if not value: 
+            * print(message) 
+        * else: 
+            * value_str=','.join(str(x) for x in value) 
+            * print("{},{}".format(message,value_str)) 
+   * 这样可以令用户的调用者个函数时更方便。
+   
+* 13. 关键字参数
+   * def rem(number,divisor):
+      * return number%divisor
+      
+   * 在调用这个函数的时候可以使用以下几种方式：
+      * rem(20,7)
+      * rem(20,divisor=7)
+      * rem(number=20,divisor=7)
+      * rem(divisor=7,number=20)
+   * 以上number=，divisor=，都叫做关键参数。
+   * 必须保证位置参数在关键参数之前：rem(number=20,7)这是不合法的
+   * 必须保证每个参数只指定以此，比如 rem（7，number=20）这是不合法的，因为7已经占据了参数number的位置，表明在number已经有值了，再使用number关键字参数就不行了，在这种情况下必须把divsor=也加上表明这个参数时传递给divisor的。
+   * 需要记住这个和默认参数的区别：
+      * def rem(number=20,divisor=7):
+         * return number%divisor
+      * 再定义函数的时候使用 number=20，divisor=7，表示在调用函数时如果没有使用参数，那么就使用默认的参数20和7
+
+* 14. 动态默认值参数
+   * def log(message,when=None):
+      * print('{},{}'.format(message,when=datetime.now()))
+      
+   * 这样会在每次调用函数的时候打印出调用函数所在的时间
+   
+* 15. 如何保证每次调用函数时必须使用关键字参数以明晰其意图
+   * def rem(number,divisor,* ignore_overflow=False):
+      * ...
+   * 在调用这个函数的时候，如果想更改* 号之后的参数必须使用关键字参数。 rem(20,7,ignore_overflow=True)是合法的；rem(20,7,True)是不合法的 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+            
+                                                
+      
+      
    
